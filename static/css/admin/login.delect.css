@@ -1,0 +1,20 @@
+.box{
+	width: 400px;
+	height: 200px;
+	margin: auto;
+	border: 1px solid #ccc;
+}
+.title{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background: #f80;
+	border: 1px solid #ccc;
+}
+.con{
+	width: 100%;
+	height: 170px;
+	line-height: 30px;
+	text-align: center;
+}

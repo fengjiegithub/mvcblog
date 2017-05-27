@@ -1,0 +1,227 @@
+{include file="index/header.html"}
+<!--<!DOCTYPE html>-->
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="{CSS_PATH}/main.css" />
+		<link rel="stylesheet" href="{CSS_PATH}/admin/bootstrap.min.css" />
+		<script src="{JS_PATH}/jquery.js"></script>
+		<script src="{JS_PATH}/show.js"></script>
+	</head>
+
+	<body>
+		<div class="note">
+			<div class="post">
+				<div class="article">
+					<h1 class="title">{$result["stitle"]}</h1>
+					<div class="author">
+						<a class="avatar" href="">
+							<img src="{$result['uimg']}" alt="144">
+						</a>
+						<div class="info">
+							<span class="tag">作者</span>
+							<span class="name author-name" attr="{$result['uid']}" sid="{$result['sid']}"><a href="">{$result["uname"]}</a></span>
+							<a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+							<div class="meta">
+								<span class="publish-time">{$result["stime"]}</span>
+								<span class="wordage">字数 <span>{strlen($result["scon"])}</span></span>
+								<span class="views-count">阅读  <span class="hitnum">{$result["hits"]}</span></span><span class="comments-count">评论  <span class="comment">{count($liuyanArr)}</span></span><span class="likes-count">喜欢 301</span></div>
+						</div>
+					</div>
+					<div class="show-content">
+						{$result["scon"]}
+					</div>
+					<div class="show-foot">
+						<a class="notebook" href="/nb/10339969">
+							<i class="iconfont ic-search-notebook"></i> <span>日记本</span>
+						</a>
+						<div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+							© 著作权归作者所有
+						</div>
+						<div class="modal-wrap" data-report-note="">
+							<a id="report-modal">举报文章</a>
+						</div>
+					</div>
+				</div>
+				<div class="follow-detail">
+					<div class="info">
+						{if $guanzhu=="true"}
+						<a class="btn btn-success guanzhu" style="display: none;"><span>关注</span></a>
+						<a class="btn btn-success quxiaoguanzhu"><span>取消关注</span></a>
+						{elseif $guanzhu=="false"}
+						<a class="btn btn-success guanzhu"><span>关注</span></a>
+						<a class="btn btn-success quxiaoguanzhu" style="display: none;"><span>取消关注</span></a>
+						{elseif $guanzhu=="nosession"}
+						<a class="btn btn-success guanzhu"><span>关注</span></a>
+						<a class="btn btn-success quxiaoguanzhu" style="display: none;"><span>取消关注</span></a>
+						{/if} {if $love=="true"}
+						<a class="btn btn-success love" style="display: none;"><span>收藏</span></a>
+						<a class="btn btn-success loveCancel"><span>取消收藏</span></a>
+						{elseif $love=="false"}
+						<a class="btn btn-success love"><span>收藏</span></a>
+						<a class="btn btn-success loveCancel" style="display: none;"><span>取消收藏</span></a>
+						{elseif $love=="nosession"}
+						<a class="btn btn-success love"><span>收藏</span></a>
+						<a class="btn btn-success loveCancel" style="display: none;"><span>取消收藏</span></a>
+						{/if}
+					</div>
+				</div>
+				<div>
+					<div id="comment-list" class="comment-list">
+						<div class="submit submit1">
+							<form class="new-comment">
+								<a class="avatar"><img src="{IMG_PATH}/11.jpg"></a><textarea class="mcon" placeholder="写下你的评论..."></textarea>
+								<div class="write-function-block">
+									<a class="btn btn-send">发送</a>
+									<a class="cancel">取消</a>
+								</div>
+							</form>
+						</div>
+						<div id="normal-comment-list" class="normal-comment-list ">
+							<div class="message">
+								<div>
+									<div class="comment"style="display: none;">
+										<div class="liuyan">
+											<div class="author">
+												<a href="" target="_blank" class="avatar"><img src=""></a>
+												<div class="info">
+													<a href="" target="_blank" class="name"></a>
+													<div class="meta"><span></span></div>
+												</div>
+											</div>
+											<div class="comment-wrap">
+												<p></p>
+												<div class="tool-group">
+													<a><i class="iconfont ic-zan"></i> <span>8人赞</span></a>
+													<a class="replayBtn replayBtn1" uid2="" pid=""><i class="iconfont ic-comment"></i> <span>回复1</span></a>
+												</div>
+											</div>
+										</div>
+										<div class="sub-comment-list reply">
+											
+											<div class="sub-comment replylist">
+												<p>
+													<a href="" target="_blank"></a>：
+													<span></span>
+												</p>
+												<div class="sub-tool-group"><span class="time"></span>
+													<a class="replayBtn replayBtn2" uid2="" pid=""><i class="iconfont ic-comment"></i> <span>回复2</span></a>
+												</div>
+											</div>
+											
+											<div class="sub-comment more-comment">
+												<a class="add-comment-btn"><i class="iconfont ic-subcomment"></i> <span>添加新评论</span></a>
+												<span class="line-warp"><a>收起</a></span>
+											</div>
+											<div class="submit submit2">
+												<form class="new-comment">
+													<textarea class="mcon" placeholder="写下你的评论..."></textarea>
+													<div class="write-function-block">
+														<a class="btn btn-sends replyBtn3">回复</a>
+														<a class="cancel">取消</a>
+													</div>
+												</form>
+											</div>
+											<!---->
+										</div>
+									</div>
+									
+									{if count($arr)<1} <div class="top">
+										<span class="comment">0</span>
+										<span>条评论</span>
+										<div class="pull-right">
+											<a class="active">按喜欢排序</a>
+											<a class="">按时间正序</a>
+											<a class="">按时间倒序</a>
+										</div>
+								</div>
+								{else}
+								<div class="top">
+									<span class="comment">{count($liuyanArr)}</span>
+									<span>条评论</span>
+									<div class="pull-right">
+										<a class="active">按喜欢排序</a>
+										<a class="">按时间正序</a>
+										<a class="">按时间倒序</a>
+									</div>
+								</div>
+							</div>
+
+							{foreach $arr as $v}
+							<div class="comment">
+								<div class="liuyan">
+									<div class="author">
+										<a href="" target="_blank" class="avatar"><img src=""></a>
+										<div class="info">
+											<a href="" target="_blank" class="name">{$v["uname"]}</a>
+											<div class="meta"><span>{$v["mtime"]}</span></div>
+										</div>
+									</div>
+									<div class="comment-wrap">
+										<p>{$v["mcon"]}</p>
+										<div class="tool-group">
+											<a><i class="iconfont ic-zan"></i> <span>8人赞</span></a>
+											<a class="replayBtn replayBtn1" uid2="{$v['uid1']}" pid="{$v['mid']}"><i class="iconfont ic-comment"></i> <span>回复</span></a>
+										</div>
+									</div>
+								</div>
+								<div class="sub-comment-list reply">
+									{foreach $v["son"] as $v1}
+									<div class="sub-comment replylist">
+										<p>
+											<a href="" target="_blank">{$v1["uname"]}</a>：
+											<span>{$v1["mcon"]}</span>
+										</p>
+										<div class="sub-tool-group"><span class="time">{$v1["mtime"]}</span>
+											<a class="replayBtn replayBtn2" uid2="{$v1['uid1']}" pid="{$v['mid']}"><i class="iconfont ic-comment"></i> <span>回复2</span></a>
+										</div>
+									</div>
+									{/foreach}
+									<div class="sub-comment more-comment">
+										<a class="add-comment-btn"><i class="iconfont ic-subcomment"></i> <span>添加新评论</span></a>
+										<span class="line-warp"><a>收起</a></span>
+									</div>
+									<div class="submit submit2">
+										<form class="new-comment">
+											<textarea class="mcon" placeholder="写下你的评论..."></textarea>
+											<div class="write-function-block">
+												<a class="btn btn-sends replyBtn3">回复</a>
+												<a class="cancel">取消</a>
+											</div>
+										</form>
+									</div>
+									<!---->
+								</div>
+							</div>
+							{/foreach} {/if}
+						</div>
+					</div>
+					<ul class="pagination">
+						<li>
+							<a href="javascript:void(null)" class="active">1</a>
+						</li>
+						<li>
+							<a>2</a>
+						</li>
+						<li>
+							<a>3</a>
+						</li>
+						<li>
+							<a>4</a>
+						</li>
+						<li>
+							<a>下一页</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="mask"></div>
+		{include file="index/notice.html"}
+		<div class="notice">操作成功</div>
+	</body>
+
+</html>

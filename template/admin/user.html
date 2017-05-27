@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="{CSS_PATH}/admin/bootstrap.min.css" />
+	</head>
+	<style>
+		th,td{
+			text-align: center;
+		}
+	</style>
+	<body>
+		<table class="table table-bordered">
+			<tr>
+				<th>id</th>
+				<th>用户名</th>
+				<th>操作</th>
+			</tr>
+			{foreach $result as $v}
+			<tr>
+				<td>{$v["uid"]}</td>
+				<td>{$v["uname"]}</td>
+				<td><a href="index.php?m=admin&f=user&a=del&id={$v["uid"]}">删除</a>
+					<a href="index.php?m=admin&f=user&a=edit&id={$v["uid"]}">编辑</a></td>
+			</tr>
+			{/foreach}
+	    </table>
+	</body>
+</html>

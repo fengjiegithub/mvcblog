@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="{CSS_PATH}/admin/showadd.css" />
+		<script src="{JS_PATH}/ajax_upload.js"></script>
+	</head>
+	<script>
+		window.onload=function(){
+			var btn=document.querySelector(".btn");
+			var hiddenIput=document.querySelector("#hidden");
+			var newobj=new upload("upload.class.php",".file",".box","img");
+			console.log(newobj);
+			newobj.up(function(e){
+				hiddenIput.setAttribute("value",e);
+				btn.removeAttribute("disabled");
+			})
+			newobj.loadstart=function(){
+				btn.setAttribute("disabled","disabled");
+			}
+		}
+	</script>
+	<body>
+	<form action="index.php?m=admin&f=category&a=add" method="post">
+		上级分类<select name="pid">
+					<option value="0">一级分类</option>
+					{$tree}
+			</select><br/><br/>
+		添加分类<input type="text" name="cname"/><br/><br/>
+		<input type="file" name="file" value="" multiple="multiple" class="file"/>
+		<input type="hidden" name="hidden" id="hidden" value="" />
+		<div class="wrap">
+			<img src="" alt="" />
+			<div class="box"></div>
+		</div>
+		<input type="submit" value="提交" /><br/>
+	</form>
+</body>
+</html>
